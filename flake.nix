@@ -9,7 +9,7 @@
     homeConfigurations.yourname = home-manager.lib.homeManagerConfiguration {
       pkgs = import nixpkgs {
         system = "aarch64-darwin";
-        config.allowUnfreePredicate = pkg: (nixpkgs.lib.getName pkg) == "lens-desktop";
+        config.allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [ "lens-desktop" "vscode" ];
       };
       modules = [ ./home.nix ];
     };
