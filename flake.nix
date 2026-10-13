@@ -7,7 +7,10 @@
 
   outputs = { nixpkgs, home-manager, ... }: {
     homeConfigurations.yourname = home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+      pkgs = import nixpkgs {
+        system = "aarch64-darwin";
+        config.allowUnfreePredicate = pkg: (nixpkgs.lib.getName pkg) == "lens-desktop";
+      };
       modules = [ ./home.nix ];
     };
   };
